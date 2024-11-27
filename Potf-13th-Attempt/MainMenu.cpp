@@ -43,10 +43,9 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
                 menuOptions[selectedOption].setFillColor(sf::Color::Red);
             }
             if (event.key.code == sf::Keyboard::Enter) {
-                if (selectedOption == 0)std::cout << "Start Game Selected" << std::endl;
-                else if (selectedOption == 1)std::cout << "Continue Selected" << std::endl;
-                else if (selectedOption == 2)std::cout << "Settings Selected" << std::endl;
-                else if (selectedOption == 3)window.close(); // quit game
+                if (selectedOption == 0)gameState = 1; // start game
+                else if (selectedOption == 2)gameState = 2; // settings
+                else if (selectedOption == 3)window.close(); // quit
             }
         }
     }

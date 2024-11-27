@@ -1,11 +1,15 @@
 #include<SFML/Graphics.hpp>
 #include "MainMenu.h"
 #include "PauseMenu.h"
-// reference: creating game loop and pause states in sfml (https://www.sfml-dev.org/tutorials/2.5/start-linux.php)
+#include "GameWorld.h"
+// reference: integrating tilemap backgrounds in sfml explained in sprite documentation (https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
 
-void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, int& gameState) {
-    // placeholder gameplay
-    window.clear(sf::Color::Blue); // blue background for gameplay
+void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, GameWorld& gameWorld, int& gameState) {
+    // render gameplay background
+    window.clear();
+    gameWorld.render(window); // draw the tilemap background
+
+    // render placeholder text
     sf::Font font;
     if (!font.loadFromFile("CloisterBlack.ttf"))return; // load font
     sf::Text text;
@@ -21,6 +25,7 @@ void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, in
         pauseMenu.handleInput(window, isPaused, gameState);
         pauseMenu.render(window);
     }
+
     window.display();
 }
 
@@ -28,6 +33,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Path of the Foresaken");
     MainMenu menu;
     PauseMenu pauseMenu;
+    GameWorld gameWorld; // instantiate the game world
     int gameState = 0; // 0 for menu, 1 for gameplay
     bool isPaused = false;
 
@@ -47,7 +53,7 @@ int main() {
                     }
                 }
             }
-            gameplay(window, isPaused, pauseMenu, gameState);
+            gameplay(window, isPaused, pauseMenu, gameWorld, gameState);
         }
     }
     return 0;

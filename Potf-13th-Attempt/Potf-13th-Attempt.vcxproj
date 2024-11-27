@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
@@ -139,6 +140,7 @@
     <Font Include="..\..\..\..\Downloads\cloister_black\CloisterBlack.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PauseMenu.h" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include<vector>
 #include<string>
 
-// reference: creating particle effects in sfml explained in sfml vertex array tutorial (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
+// reference: creating particle effects with varying speeds explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
 class MainMenu {
 private:
     sf::Font font;
@@ -13,8 +13,9 @@ private:
     std::vector<sf::Text> menuOptions;
     int selectedOption;
 
-    // fog particle system
+    // ember particle system
     std::vector<sf::CircleShape> fogParticles;
+    std::vector<sf::Vector2f> fogSpeeds; // stores speed for each particle
 
     void initFogParticles();
 

@@ -1,6 +1,6 @@
 #include "MainMenu.h"
 #include <iostream>
-// reference: creating glow effects using sfml shape properties (https://www.sfml-dev.org/tutorials/2.5/graphics-shape.php)
+// reference: creating particle effects with varying speeds explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
 
 MainMenu::MainMenu() : selectedOption(0) {
     if (!font.loadFromFile("CloisterBlack.ttf"))throw std::runtime_error("failed to load font");
@@ -26,7 +26,7 @@ MainMenu::MainMenu() : selectedOption(0) {
     }
     menuOptions[selectedOption].setFillColor(sf::Color::Red); // highlight first option
 
-    initFogParticles(); // initialize glowing embers
+    initFogParticles(); // initialize ember particles
 }
 
 void MainMenu::initFogParticles() {
@@ -52,6 +52,11 @@ void MainMenu::initFogParticles() {
         // store both in fogParticles
         fogParticles.push_back(glow);
         fogParticles.push_back(particle);
+
+        // assign random speed
+        float randomSpeedX = -0.5f - (rand() % 10) * 0.1f; // slower for some particles
+        float randomSpeedY = 0.1f * (rand() % 3);          // subtle vertical drift
+        fogSpeeds.push_back(sf::Vector2f(randomSpeedX, randomSpeedY));
     }
 }
 
@@ -82,8 +87,8 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
 void MainMenu::update() {
     // animate embers and their glow
     for (size_t i = 0;i < fogParticles.size();i += 2) { // every 2 particles (glow + ember)
-        fogParticles[i].move(-0.8, 0.3);       // glow particle
-        fogParticles[i + 1].move(-0.8, 0.3);    // ember particle
+        fogParticles[i].move(fogSpeeds[i / 2]);       // glow particle
+        fogParticles[i + 1].move(fogSpeeds[i / 2]);    // ember particle
         if (fogParticles[i].getPosition().x < -10 || fogParticles[i].getPosition().y > 730) { // loop back
             fogParticles[i].setPosition(1280, rand() % 720);
             fogParticles[i + 1].setPosition(fogParticles[i].getPosition());

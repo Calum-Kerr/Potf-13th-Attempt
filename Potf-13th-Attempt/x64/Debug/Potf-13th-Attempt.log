@@ -1,6 +1,4 @@
 ﻿  GameWorld.cpp
 C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(15,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(15,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Main.cpp
-  Generating Code...
   Potf-13th-Attempt.vcxproj -> C:\Users\calum\source\repos\Potf-13th-Attempt\x64\Debug\Potf-13th-Attempt.exe

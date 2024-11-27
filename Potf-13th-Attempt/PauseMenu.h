@@ -5,13 +5,14 @@
 #include<vector>
 #include<string>
 
-// reference: creating pause menus explained in sfml game tutorials (https://www.sfml-dev.org/tutorials/2.5/window-events.php)
+// reference: creating a background overlay for menus explained in sfml shape tutorial (https://www.sfml-dev.org/tutorials/2.5/graphics-shape.php)
 class PauseMenu {
 private:
     sf::Font font;
     sf::Text title;
     std::vector<sf::Text> menuOptions;
     int selectedOption;
+    sf::RectangleShape background; // background rectangle
 
 public:
     PauseMenu();

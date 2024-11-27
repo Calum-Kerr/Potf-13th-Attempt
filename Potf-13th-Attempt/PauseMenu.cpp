@@ -1,8 +1,12 @@
 #include "PauseMenu.h"
-// reference: handling pause states in sfml explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/window-events.php)
+// reference: creating pause menus with backgrounds explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-shape.php)
 
 PauseMenu::PauseMenu() : selectedOption(0) {
     if (!font.loadFromFile("CloisterBlack.ttf"))throw std::runtime_error("failed to load font");
+
+    // setup background
+    background.setSize(sf::Vector2f(1280, 720)); // cover the entire screen
+    background.setFillColor(sf::Color(0, 0, 0, 200)); // semi-transparent black
 
     title.setFont(font);
     title.setString("Pause Menu");
@@ -54,6 +58,7 @@ void PauseMenu::handleInput(sf::RenderWindow& window, bool& isPaused, int& gameS
 }
 
 void PauseMenu::render(sf::RenderWindow& window) {
+    window.draw(background); // draw background first
+    window.draw(title);      // draw title
     for (const auto& opt : menuOptions)window.draw(opt); // draw menu options
-    window.draw(title); // draw title
 }

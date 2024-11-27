@@ -136,6 +136,9 @@
   <ItemGroup>
     <Font Include="..\..\..\..\Downloads\cloister_black\CloisterBlack.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainMenu.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

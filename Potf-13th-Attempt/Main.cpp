@@ -1,9 +1,9 @@
 #include<SFML/Graphics.hpp>
 #include "MainMenu.h"
-// reference: creating a game loop and integrating classes in sfml (https://www.sfml-dev.org/tutorials/2.5/start-linux.php)
+// reference: updating window size explained in sfml tutorial for video modes (https://www.sfml-dev.org/tutorials/2.5/window-window.php)
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Path of the Foresaken");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Path of the Foresaken"); // updated to 1280x720
     MainMenu menu;
 
     while (window.isOpen()) {

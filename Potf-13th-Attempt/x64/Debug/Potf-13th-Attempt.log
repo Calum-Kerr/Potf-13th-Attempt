@@ -1,8 +1,10 @@
 ﻿  MainMenu.cpp
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(40,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(40,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(52,76): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(72,29): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(72,23): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(74,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(46,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(46,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(65,76): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(85,36): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(85,30): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(86,40): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(86,34): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(88,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Potf-13th-Attempt.vcxproj -> C:\Users\calum\source\repos\Potf-13th-Attempt\x64\Debug\Potf-13th-Attempt.exe

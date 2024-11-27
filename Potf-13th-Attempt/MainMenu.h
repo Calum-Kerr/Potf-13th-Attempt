@@ -5,13 +5,18 @@
 #include<vector>
 #include<string>
 
-// reference: handling menu states in sfml explained in official tutorials (https://www.sfml-dev.org/tutorials/2.5/window-events.php)
+// reference: creating particle effects in sfml explained in sfml vertex array tutorial (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
 class MainMenu {
 private:
     sf::Font font;
     sf::Text title;
     std::vector<sf::Text> menuOptions;
     int selectedOption;
+
+    // fog particle system
+    std::vector<sf::CircleShape> fogParticles;
+
+    void initFogParticles();
 
 public:
     MainMenu();

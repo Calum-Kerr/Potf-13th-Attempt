@@ -1,6 +1,6 @@
 #include "MainMenu.h"
-#include <iostream> // for printing messages to console
-// reference: handling key events in sfml explained in sfml documentation (https://www.sfml-dev.org/tutorials/2.5/window-events.php)
+#include <iostream>
+// reference: animating particles explained in sfml vertex array tutorial (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
 
 MainMenu::MainMenu() : selectedOption(0) {
     if (!font.loadFromFile("CloisterBlack.ttf"))throw std::runtime_error("failed to load font");
@@ -25,6 +25,17 @@ MainMenu::MainMenu() : selectedOption(0) {
         y += 50;
     }
     menuOptions[selectedOption].setFillColor(sf::Color::Red); // highlight first option
+
+    initFogParticles(); // initialize fog particles
+}
+
+void MainMenu::initFogParticles() {
+    for (int i = 0;i < 50;i++) { // 50 particles
+        sf::CircleShape particle(5); // small circle as a particle
+        particle.setFillColor(sf::Color(255, 255, 255, 50)); // semi-transparent white
+        particle.setPosition(rand() % 1280, rand() % 720); // random position
+        fogParticles.push_back(particle);
+    }
 }
 
 void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
@@ -52,11 +63,21 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
 }
 
 void MainMenu::update() {
-    // no updates yet
+    // animate fog particles
+    for (auto& particle : fogParticles) {
+        particle.move(-0.5, 0); // move left
+        if (particle.getPosition().x < -10) // loop back when off-screen
+            particle.setPosition(1280, rand() % 720);
+    }
 }
 
 void MainMenu::render(sf::RenderWindow& window) {
     window.clear();
+
+    // draw fog particles
+    for (const auto& particle : fogParticles)
+        window.draw(particle);
+
     window.draw(title);
     for (const auto& opt : menuOptions)window.draw(opt);
     window.display();

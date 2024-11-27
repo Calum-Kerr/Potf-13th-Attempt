@@ -1,9 +1,10 @@
 #include<SFML/Graphics.hpp>
 #include "MainMenu.h"
-// reference: implementing game states in sfml explained in sfml game loop documentation (https://www.sfml-dev.org/tutorials/2.5/start-linux.php)
+#include "PauseMenu.h"
+// reference: creating game loop and pause states in sfml (https://www.sfml-dev.org/tutorials/2.5/start-linux.php)
 
-void gameplay(sf::RenderWindow& window) {
-    // placeholder gameplay state
+void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, int& gameState) {
+    // placeholder gameplay
     window.clear(sf::Color::Blue); // blue background for gameplay
     sf::Font font;
     if (!font.loadFromFile("CloisterBlack.ttf"))return; // load font
@@ -14,13 +15,21 @@ void gameplay(sf::RenderWindow& window) {
     text.setFillColor(sf::Color::White);
     text.setPosition(450, 300); // center text
     window.draw(text);
+
+    // if paused, render pause menu
+    if (isPaused) {
+        pauseMenu.handleInput(window, isPaused, gameState);
+        pauseMenu.render(window);
+    }
     window.display();
 }
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Path of the Foresaken");
     MainMenu menu;
-    int gameState = 0; // 0 for menu, 1 for gameplay, 2 for settings
+    PauseMenu pauseMenu;
+    int gameState = 0; // 0 for menu, 1 for gameplay
+    bool isPaused = false;
 
     while (window.isOpen()) {
         if (gameState == 0) { // main menu
@@ -29,11 +38,16 @@ int main() {
             menu.render(window);
         }
         else if (gameState == 1) { // gameplay
-            gameplay(window);
-        }
-        else if (gameState == 2) { // settings (not implemented yet)
-            window.clear(sf::Color::Green); // green placeholder for settings
-            window.display();
+            if (!isPaused) {
+                sf::Event event;
+                while (window.pollEvent(event)) {
+                    if (event.type == sf::Event::Closed)window.close();
+                    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                        isPaused = true; // pause game with Esc
+                    }
+                }
+            }
+            gameplay(window, isPaused, pauseMenu, gameState);
         }
     }
     return 0;

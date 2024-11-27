@@ -19,7 +19,7 @@ GameWorld::GameWorld() : tileSize(32), gridSize(40, 2) { // 40 tiles wide, 2 til
 
 void GameWorld::initTileRects() {
     // Add specific floor tile sub-rectangle
-    tileRects.push_back(sf::IntRect(0, 32, 32, 32)); // Floor tile (adjust coordinates if needed)
+    tileRects.push_back(sf::IntRect(0, 64, 32, 32)); // Floor tile (adjust coordinates if needed)
 }
 
 void GameWorld::render(sf::RenderWindow& window) {

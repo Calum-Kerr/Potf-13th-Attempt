@@ -5,7 +5,7 @@
 #include<vector>
 #include<string>
 
-// reference: creating a class for menu management explained in sfml official tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
+// reference: handling menu states in sfml explained in official tutorials (https://www.sfml-dev.org/tutorials/2.5/window-events.php)
 class MainMenu {
 private:
     sf::Font font;
@@ -15,7 +15,7 @@ private:
 
 public:
     MainMenu();
-    void handleInput(sf::RenderWindow& window);
+    void handleInput(sf::RenderWindow& window, int& gameState);
     void update();
     void render(sf::RenderWindow& window);
 };

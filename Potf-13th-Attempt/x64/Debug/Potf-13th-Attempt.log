@@ -1,3 +1,5 @@
 ﻿  Main.cpp
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\Main.cpp(25,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MainMenu.cpp
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\MainMenu.cpp(36,76): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   Potf-13th-Attempt.vcxproj -> C:\Users\calum\source\repos\Potf-13th-Attempt\x64\Debug\Potf-13th-Attempt.exe

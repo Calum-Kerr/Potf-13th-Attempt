@@ -26,13 +26,17 @@ MainMenu::MainMenu() : selectedOption(0) {
     }
     menuOptions[selectedOption].setFillColor(sf::Color::Red); // highlight first option
 
-    initFogParticles(); // initialize fog particles
+    initFogParticles(); // initialize ember particles
 }
 
 void MainMenu::initFogParticles() {
     for (int i = 0;i < 50;i++) { // 50 particles
-        sf::CircleShape particle(5); // small circle as a particle
-        particle.setFillColor(sf::Color(255, 255, 255, 50)); // semi-transparent white
+        sf::CircleShape particle(3); // smaller circle for embers
+        int colorChoice = rand() % 3; // randomly choose red, orange, or yellow
+        if (colorChoice == 0) particle.setFillColor(sf::Color(255, 69, 0)); // red-orange
+        else if (colorChoice == 1) particle.setFillColor(sf::Color(255, 140, 0)); // orange
+        else particle.setFillColor(sf::Color(255, 215, 0)); // yellow
+
         particle.setPosition(rand() % 1280, rand() % 720); // random position
         fogParticles.push_back(particle);
     }
@@ -63,10 +67,10 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
 }
 
 void MainMenu::update() {
-    // animate fog particles
+    // animate ember particles
     for (auto& particle : fogParticles) {
-        particle.move(-0.5, 0); // move left
-        if (particle.getPosition().x < -10) // loop back when off-screen
+        particle.move(-0.8, 0.3); // move left and slightly down
+        if (particle.getPosition().x < -10 || particle.getPosition().y > 730) // loop back
             particle.setPosition(1280, rand() % 720);
     }
 }
@@ -74,7 +78,7 @@ void MainMenu::update() {
 void MainMenu::render(sf::RenderWindow& window) {
     window.clear();
 
-    // draw fog particles
+    // draw ember particles
     for (const auto& particle : fogParticles)
         window.draw(particle);
 

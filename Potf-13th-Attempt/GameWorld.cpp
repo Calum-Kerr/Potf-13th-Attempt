@@ -18,24 +18,45 @@ GameWorld::GameWorld() : tileSize(32), gridSize(40, 2) { // 40 tiles wide, 2 til
 }
 
 void GameWorld::initTileRects() {
-    // Add specific floor tile sub-rectangle
-    tileRects.push_back(sf::IntRect(32, 64, 64, 32)); // Floor tile (adjust coordinates if needed)
+    // add specific floor tile sub-rectangle
+    tileRects.push_back(sf::IntRect(32, 64, 64, 32)); // floor tile (adjust coordinates if needed)
 }
 
 void GameWorld::render(sf::RenderWindow& window) {
-    // Draw the repeating background
-    for (int y = 0; y < 22; ++y) { // Enough tiles to cover the vertical space
-        for (int x = 0; x < 40; ++x) { // Enough tiles to cover the horizontal space
-            backgroundSprite.setPosition(x * 160, y * 160); // Position each tile
+    // draw the repeating background
+    for (int y = 0; y < 22; ++y) { // enough tiles to cover the vertical space
+        for (int x = 0; x < 40; ++x) { // enough tiles to cover the horizontal space
+            backgroundSprite.setPosition(x * 160, y * 160); // position each tile
             window.draw(backgroundSprite);
         }
     }
 
-    // Render floor tiles
-    int floorY = 720 - tileSize; // Position the floor at the bottom
+    // render floor tiles
+    int floorY = 720 - tileSize; // position the floor at the bottom
     for (int x = 0; x < gridSize.x; ++x) {
-        tileSprite.setTextureRect(tileRects[0]); // Use the floor tile
-        tileSprite.setPosition(x * tileSize, floorY); // Position the tile
+        tileSprite.setTextureRect(tileRects[0]); // use the floor tile
+        tileSprite.setPosition(x * tileSize, floorY); // position the tile
         window.draw(tileSprite);
     }
+}
+
+bool GameWorld::isOnFloor(const sf::Sprite& playerSprite) {
+    sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
+
+    // check for collision with each floor tile
+    int floorY = 720 - tileSize; // adjust for your game's floor position
+    for (int x = 0; x < gridSize.x; ++x) {
+        tileSprite.setTextureRect(tileRects[0]); // use the floor tile rectangle
+        tileSprite.setPosition(x * tileSize, floorY); // position the tile
+
+        sf::FloatRect tileBounds = tileSprite.getGlobalBounds();
+
+        // check if player is resting on top of the tile
+        if (playerBounds.intersects(tileBounds) &&
+            playerBounds.top + playerBounds.height <= tileBounds.top + 5) { // add tolerance
+            return true;
+        }
+    }
+
+    return false; // no collision detected
 }

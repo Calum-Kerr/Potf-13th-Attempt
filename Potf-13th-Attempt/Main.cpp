@@ -2,23 +2,17 @@
 #include "MainMenu.h"
 #include "PauseMenu.h"
 #include "GameWorld.h"
-// reference: integrating tilemap backgrounds in sfml explained in sprite documentation (https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
+#include "Player.h"
+// reference: integrating tilemap backgrounds and player animation in sfml explained in sfml sprite documentation (https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
 
-void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, GameWorld& gameWorld, int& gameState) {
+void gameplay(sf::RenderWindow& window, bool& isPaused, PauseMenu& pauseMenu, GameWorld& gameWorld, Player& player, int& gameState) {
     // render gameplay background
     window.clear();
     gameWorld.render(window); // draw the tilemap background
 
-    // render placeholder text
-    sf::Font font;
-    if (!font.loadFromFile("CloisterBlack.ttf"))return; // load font
-    sf::Text text;
-    text.setFont(font);
-    text.setString("Gameplay Placeholder");
-    text.setCharacterSize(40);
-    text.setFillColor(sf::Color::White);
-    text.setPosition(450, 300); // center text
-    window.draw(text);
+    // update and render the player
+    player.update(gameWorld); // pass GameWorld for collision detection
+    player.render(window);
 
     // if paused, render pause menu
     if (isPaused) {
@@ -34,6 +28,7 @@ int main() {
     MainMenu menu;
     PauseMenu pauseMenu;
     GameWorld gameWorld; // instantiate the game world
+    Player player; // instantiate the player
     int gameState = 0; // 0 for menu, 1 for gameplay
     bool isPaused = false;
 
@@ -47,13 +42,13 @@ int main() {
             if (!isPaused) {
                 sf::Event event;
                 while (window.pollEvent(event)) {
-                    if (event.type == sf::Event::Closed)window.close();
+                    if (event.type == sf::Event::Closed) window.close();
                     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                         isPaused = true; // pause game with Esc
                     }
                 }
             }
-            gameplay(window, isPaused, pauseMenu, gameWorld, gameState);
+            gameplay(window, isPaused, pauseMenu, gameWorld, player, gameState);
         }
     }
     return 0;

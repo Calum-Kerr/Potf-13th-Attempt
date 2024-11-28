@@ -12,7 +12,7 @@ MainMenu::MainMenu() : selectedOption(0) {
     title.setPosition(200, 100);
 
     // setup menu options
-    std::vector<std::string> options = { "Start Game","Continue","Settings","Quit" };
+    std::vector<std::string> options = { "Start Game","Continue","Settings (Don't click this!)","Quit" };
     float y = 200;
     for (const auto& opt : options) {
         sf::Text menuText;

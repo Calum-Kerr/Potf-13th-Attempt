@@ -72,17 +72,17 @@ void Player::handleInput() {
 
     // horizontal movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        velocity.x = -10; // move left
+        velocity.x = -100; // move left
         facingRight = false;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        velocity.x = 10; // move right
+        velocity.x = 100; // move right
         facingRight = true;
     }
 
     // jump
     if (!jumping && (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))) {
-        velocity.y = -15; // set upward velocity
+        velocity.y = -400; // set upward velocity
         jumping = true;   // player is now jumping
         currentState = "Jump"; // switch to jump state
     }
@@ -118,8 +118,8 @@ void Player::update(GameWorld& world) {
     updateAnimation();
 
     // apply gravity
-    if (velocity.y < 10) { // terminal velocity limit
-        velocity.y += 1; // gravity force
+    if (velocity.y < 1000) { // terminal velocity limit
+        velocity.y += 9.8; // gravity force
     }
 
     // apply velocity

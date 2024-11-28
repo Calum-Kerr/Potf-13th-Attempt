@@ -29,6 +29,7 @@ MainMenu::MainMenu() : selectedOption(0), fpsLimit(60) { // default FPS limit
     initFogParticles(); // initialize ember particles
 }
 
+
 void MainMenu::initFogParticles() {
     for (int i = 0; i < 50; i++) { // 50 particles
         sf::CircleShape particle(3);

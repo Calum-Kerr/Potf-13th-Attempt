@@ -136,6 +136,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SettingsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\..\Downloads\cloister_black\CloisterBlack.ttf" />
@@ -145,6 +146,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SettingsMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

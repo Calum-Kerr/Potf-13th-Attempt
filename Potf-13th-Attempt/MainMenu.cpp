@@ -66,7 +66,8 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
                 menuOptions[selectedOption].setFillColor(sf::Color::Red);
             }
             if (event.key.code == sf::Keyboard::Down) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White);
+                menuOptions[selectedOption].setFillColor(sf::Color::White); 
+
                 selectedOption = (selectedOption + 1) % menuOptions.size();
                 menuOptions[selectedOption].setFillColor(sf::Color::Red);
             }

@@ -1,9 +1,9 @@
 #include "MainMenu.h"
 #include <iostream>
-// reference: creating particle effects with varying speeds explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-vertex-array.php)
 
-MainMenu::MainMenu() : selectedOption(0) {
-    if (!font.loadFromFile("CloisterBlack.ttf"))throw std::runtime_error("failed to load font");
+MainMenu::MainMenu() : selectedOption(0), fpsLimit(60) { // default FPS limit
+    if (!font.loadFromFile("CloisterBlack.ttf"))
+        throw std::runtime_error("failed to load font");
 
     title.setFont(font);
     title.setString("Path of the Foresaken");
@@ -12,7 +12,7 @@ MainMenu::MainMenu() : selectedOption(0) {
     title.setPosition(200, 100);
 
     // setup menu options
-    std::vector<std::string> options = { "Start Game","Continue","Settings","Quit" };
+    std::vector<std::string> options = { "Start Game", "Continue", "Settings", "Quit" };
     float y = 200;
     for (const auto& opt : options) {
         sf::Text menuText;
@@ -29,33 +29,29 @@ MainMenu::MainMenu() : selectedOption(0) {
     initFogParticles(); // initialize ember particles
 }
 
+
 void MainMenu::initFogParticles() {
-    for (int i = 0;i < 50;i++) { // 50 particles
-        sf::CircleShape particle(3); // small ember
-        sf::CircleShape glow(6);     // larger "halo" for glow
+    for (int i = 0; i < 50; i++) { // 50 particles
+        sf::CircleShape particle(3);
+        sf::CircleShape glow(6);
 
-        // assign ember color
-        int colorChoice = rand() % 3; // randomly choose red, orange, or yellow
-        if (colorChoice == 0) particle.setFillColor(sf::Color(255, 69, 0)); // red-orange
-        else if (colorChoice == 1) particle.setFillColor(sf::Color(255, 140, 0)); // orange
-        else particle.setFillColor(sf::Color(255, 215, 0)); // yellow
+        int colorChoice = rand() % 3; // random red, orange, or yellow
+        if (colorChoice == 0) particle.setFillColor(sf::Color(255, 69, 0));
+        else if (colorChoice == 1) particle.setFillColor(sf::Color(255, 140, 0));
+        else particle.setFillColor(sf::Color(255, 215, 0));
 
-        // configure glow
-        glow.setFillColor(sf::Color(255, 69, 0, 50)); // semi-transparent red glow
-        glow.setOrigin(3, 3); // centre glow
-        glow.setPosition(rand() % 1280, rand() % 720); // random position
+        glow.setFillColor(sf::Color(255, 69, 0, 50));
+        glow.setOrigin(3, 3);
+        glow.setPosition(rand() % 1280, rand() % 720);
 
-        // set ember position
-        particle.setOrigin(1.5, 1.5); // centre ember
-        particle.setPosition(glow.getPosition()); // same as glow
+        particle.setOrigin(1.5, 1.5);
+        particle.setPosition(glow.getPosition());
 
-        // store both in fogParticles
         fogParticles.push_back(glow);
         fogParticles.push_back(particle);
 
-        // assign random speed
-        float randomSpeedX = -0.5f - (rand() % 10) * 0.1f; // slower for some particles
-        float randomSpeedY = 0.1f * (rand() % 3);          // subtle vertical drift
+        float randomSpeedX = -0.5f - (rand() % 10) * 0.1f;
+        float randomSpeedY = 0.1f * (rand() % 3);
         fogSpeeds.push_back(sf::Vector2f(randomSpeedX, randomSpeedY));
     }
 }
@@ -63,7 +59,7 @@ void MainMenu::initFogParticles() {
 void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
     sf::Event event;
     while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)window.close();
+        if (event.type == sf::Event::Closed) window.close();
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Up) {
                 menuOptions[selectedOption].setFillColor(sf::Color::White);
@@ -71,25 +67,29 @@ void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
                 menuOptions[selectedOption].setFillColor(sf::Color::Red);
             }
             if (event.key.code == sf::Keyboard::Down) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White);
+                menuOptions[selectedOption].setFillColor(sf::Color::White); 
+
                 selectedOption = (selectedOption + 1) % menuOptions.size();
                 menuOptions[selectedOption].setFillColor(sf::Color::Red);
             }
             if (event.key.code == sf::Keyboard::Enter) {
-                if (selectedOption == 0)gameState = 1; // start game
-                else if (selectedOption == 2)gameState = 2; // settings
-                else if (selectedOption == 3)window.close(); // quit
+                if (selectedOption == 0) gameState = 1; // start game
+                else if (selectedOption == 2) { // settings menu
+                    settingsMenu.handleInput(window, gameState);
+                    settingsMenu.render(window);
+                    settingsMenu.applySettings(window);
+                }
+                else if (selectedOption == 3) window.close(); // quit
             }
         }
     }
 }
 
 void MainMenu::update() {
-    // animate embers and their glow
-    for (size_t i = 0;i < fogParticles.size();i += 2) { // every 2 particles (glow + ember)
-        fogParticles[i].move(fogSpeeds[i / 2]);       // glow particle
-        fogParticles[i + 1].move(fogSpeeds[i / 2]);    // ember particle
-        if (fogParticles[i].getPosition().x < -10 || fogParticles[i].getPosition().y > 730) { // loop back
+    for (size_t i = 0; i < fogParticles.size(); i += 2) {
+        fogParticles[i].move(fogSpeeds[i / 2]);
+        fogParticles[i + 1].move(fogSpeeds[i / 2]);
+        if (fogParticles[i].getPosition().x < -10 || fogParticles[i].getPosition().y > 730) {
             fogParticles[i].setPosition(1280, rand() % 720);
             fogParticles[i + 1].setPosition(fogParticles[i].getPosition());
         }
@@ -99,11 +99,16 @@ void MainMenu::update() {
 void MainMenu::render(sf::RenderWindow& window) {
     window.clear();
 
-    // draw ember particles with their glow
     for (const auto& particle : fogParticles)
         window.draw(particle);
 
     window.draw(title);
-    for (const auto& opt : menuOptions)window.draw(opt);
+    for (const auto& opt : menuOptions)
+        window.draw(opt);
+
     window.display();
+}
+
+int MainMenu::getFpsLimit() const {
+    return fpsLimit;
 }

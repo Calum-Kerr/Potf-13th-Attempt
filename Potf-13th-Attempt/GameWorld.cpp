@@ -1,62 +1,64 @@
 #include "GameWorld.h"
-// reference: layering background and floor in sfml explained in sfml sprite documentation (https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
+#include <stdexcept>
 
-GameWorld::GameWorld() : tileSize(32), gridSize(40, 2) { // 40 tiles wide, 2 tiles high for a floor
-    // load background texture
+// constructor initializes game world and loads textures
+GameWorld::GameWorld() :tileSize(32), gridSize(40, 2) {
     if (!backgroundTexture.loadFromFile("160x160 background tilemap.png"))
         throw std::runtime_error("failed to load background texture");
 
     backgroundSprite.setTexture(backgroundTexture);
-    backgroundSprite.setScale(1280.f / 160.f, 720.f / 160.f); // scale background to fill screen
+    backgroundSprite.setScale(1280.f / 160.f, 720.f / 160.f);
 
-    // load floor tilemap texture
     if (!tilemapTexture.loadFromFile("Basic Tilemap.png"))
         throw std::runtime_error("failed to load tilemap texture");
 
     tileSprite.setTexture(tilemapTexture);
-    initTileRects(); // initialize sub-rectangles for individual tiles
+    initTileRects();
 }
 
+// this function initializes the tile rectangles for the game world
 void GameWorld::initTileRects() {
-    // add specific floor tile sub-rectangle
-    tileRects.push_back(sf::IntRect(32, 64, 64, 32)); // floor tile (adjust coordinates if needed)
+    tileRects.push_back(sf::IntRect(32, 64, 64, 32));
 }
 
+// this function updates the game world (currently empty but can be expanded)
+void GameWorld::update(float deltaTime) {
+    // update world as needed
+}
+
+// this function renders the game world on the window
 void GameWorld::render(sf::RenderWindow& window) {
-    // draw the repeating background
-    for (int y = 0; y < 22; ++y) { // enough tiles to cover the vertical space
-        for (int x = 0; x < 40; ++x) { // enough tiles to cover the horizontal space
-            backgroundSprite.setPosition(x * 160, y * 160); // position each tile
+    for (int y = 0; y < 22; ++y) {
+        for (int x = 0; x < 40; ++x) {
+            backgroundSprite.setPosition(x * 160, y * 160);
             window.draw(backgroundSprite);
         }
     }
 
-    // render floor tiles
-    int floorY = 720 - tileSize; // position the floor at the bottom
+    int floorY = 720 - tileSize;
     for (int x = 0; x < gridSize.x; ++x) {
-        tileSprite.setTextureRect(tileRects[0]); // use the floor tile
-        tileSprite.setPosition(x * tileSize, floorY); // position the tile
+        tileSprite.setTextureRect(tileRects[0]);
+        tileSprite.setPosition(x * tileSize, floorY);
         window.draw(tileSprite);
     }
 }
 
+// this function checks if the player is on the floor
 bool GameWorld::isOnFloor(const sf::Sprite& playerSprite) {
     sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
 
-    // check for collision with each floor tile
-    int floorY = 720 - tileSize; // adjust for your game's floor position
+    int floorY = 720 - tileSize;
     for (int x = 0; x < gridSize.x; ++x) {
-        tileSprite.setTextureRect(tileRects[0]); // use the floor tile rectangle
-        tileSprite.setPosition(x * tileSize, floorY); // position the tile
+        tileSprite.setTextureRect(tileRects[0]);
+        tileSprite.setPosition(x * tileSize, floorY);
 
         sf::FloatRect tileBounds = tileSprite.getGlobalBounds();
 
         // check if player is resting on top of the tile
         if (playerBounds.intersects(tileBounds) &&
-            playerBounds.top + playerBounds.height <= tileBounds.top + 5) { // add tolerance
+            playerBounds.top + playerBounds.height <= tileBounds.top + 5) {
             return true;
         }
     }
-
-    return false; // no collision detected
+    return false;
 }

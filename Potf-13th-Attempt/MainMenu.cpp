@@ -1,17 +1,20 @@
 #include "MainMenu.h"
 #include <iostream>
+#include <stdexcept>
 
-MainMenu::MainMenu() : selectedOption(0), fpsLimit(60) { // default FPS limit
+// constructor initializes main menu and loads font
+MainMenu::MainMenu() :selectedOption(0), fpsLimit(60) {
     if (!font.loadFromFile("CloisterBlack.ttf"))
         throw std::runtime_error("failed to load font");
 
+    // setting up the title text
     title.setFont(font);
     title.setString("Path of the Foresaken");
     title.setCharacterSize(50);
     title.setFillColor(sf::Color::White);
     title.setPosition(200, 100);
 
-    // setup menu options
+    // setting up the options for main menu
     std::vector<std::string> options = { "Start Game", "Continue", "Settings", "Quit" };
     float y = 200;
     for (const auto& opt : options) {
@@ -24,18 +27,19 @@ MainMenu::MainMenu() : selectedOption(0), fpsLimit(60) { // default FPS limit
         menuOptions.push_back(menuText);
         y += 50;
     }
-    menuOptions[selectedOption].setFillColor(sf::Color::Red); // highlight first option
+    menuOptions[selectedOption].setFillColor(sf::Color::Red);
 
-    initFogParticles(); // initialize ember particles
+    // initializing fog particles for visual effect
+    initFogParticles();
 }
 
-
+// this function initializes fog particles for the background effect
 void MainMenu::initFogParticles() {
-    for (int i = 0; i < 50; i++) { // 50 particles
+    for (int i = 0; i < 50; i++) {
         sf::CircleShape particle(3);
         sf::CircleShape glow(6);
 
-        int colorChoice = rand() % 3; // random red, orange, or yellow
+        int colorChoice = rand() % 3;
         if (colorChoice == 0) particle.setFillColor(sf::Color(255, 69, 0));
         else if (colorChoice == 1) particle.setFillColor(sf::Color(255, 140, 0));
         else particle.setFillColor(sf::Color(255, 215, 0));
@@ -56,35 +60,41 @@ void MainMenu::initFogParticles() {
     }
 }
 
-void MainMenu::handleInput(sf::RenderWindow& window, int& gameState) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) window.close();
-        if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Up) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White);
-                selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
-                menuOptions[selectedOption].setFillColor(sf::Color::Red);
-            }
-            if (event.key.code == sf::Keyboard::Down) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White); 
+// this function handles user input and updates the selected option
+void MainMenu::handleEvent(const sf::Event& event, sf::RenderWindow& window, int& gameState) {
+    if (event.type == sf::Event::Closed) {
+        window.close();
+    }
 
-                selectedOption = (selectedOption + 1) % menuOptions.size();
-                menuOptions[selectedOption].setFillColor(sf::Color::Red);
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Up) {
+            menuOptions[selectedOption].setFillColor(sf::Color::White);
+            selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
+            menuOptions[selectedOption].setFillColor(sf::Color::Red);
+        }
+        else if (event.key.code == sf::Keyboard::Down) {
+            menuOptions[selectedOption].setFillColor(sf::Color::White);
+            selectedOption = (selectedOption + 1) % menuOptions.size();
+            menuOptions[selectedOption].setFillColor(sf::Color::Red);
+        }
+        else if (event.key.code == sf::Keyboard::Enter) {
+            if (selectedOption == 0) {
+                gameState = 1; // start game
             }
-            if (event.key.code == sf::Keyboard::Enter) {
-                if (selectedOption == 0) gameState = 1; // start game
-                else if (selectedOption == 2) { // settings menu
-                    settingsMenu.handleInput(window, gameState);
-                    settingsMenu.render(window);
-                    settingsMenu.applySettings(window);
-                }
-                else if (selectedOption == 3) window.close(); // quit
+            else if (selectedOption == 1) {
+                // continue - not implemented, could set gameState=1 if you want
+            }
+            else if (selectedOption == 2) {
+                gameState = 2; // go to settings
+            }
+            else if (selectedOption == 3) {
+                window.close(); // quit
             }
         }
     }
 }
 
+// this function updates the fog particles for the background effect
 void MainMenu::update() {
     for (size_t i = 0; i < fogParticles.size(); i += 2) {
         fogParticles[i].move(fogSpeeds[i / 2]);
@@ -96,19 +106,17 @@ void MainMenu::update() {
     }
 }
 
+// this function renders the main menu on the window
 void MainMenu::render(sf::RenderWindow& window) {
-    window.clear();
-
     for (const auto& particle : fogParticles)
         window.draw(particle);
 
     window.draw(title);
     for (const auto& opt : menuOptions)
         window.draw(opt);
-
-    window.display();
 }
 
+// this function returns the fps limit
 int MainMenu::getFpsLimit() const {
     return fpsLimit;
 }

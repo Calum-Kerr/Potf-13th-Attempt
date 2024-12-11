@@ -1,64 +1,85 @@
 #include "PauseMenu.h"
-// reference: creating pause menus with backgrounds explained in sfml tutorials (https://www.sfml-dev.org/tutorials/2.5/graphics-shape.php)
+#include <iostream>
+#include <stdexcept>
 
-PauseMenu::PauseMenu() : selectedOption(0) {
-    if (!font.loadFromFile("CloisterBlack.ttf"))throw std::runtime_error("failed to load font");
+// constructor initializes pause menu and loads font
+PauseMenu::PauseMenu() {
+    std::cout << "initializing pause menu" << std::endl;
+    if (!font.loadFromFile("CloisterBlack.ttf"))
+        throw std::runtime_error("failed to load font");
 
-    // setup background
-    background.setSize(sf::Vector2f(1280, 720)); // cover the entire screen
-    background.setFillColor(sf::Color(0, 0, 0, 200)); // semi-transparent black
-
+    // setting up the title text
     title.setFont(font);
-    title.setString("Pause Menu");
+    title.setString("Paused");
     title.setCharacterSize(50);
     title.setFillColor(sf::Color::White);
-    title.setPosition(480, 150); // center the title
+    title.setPosition(200, 100);
 
-    // setup menu options
-    std::vector<std::string> options = { "Resume","Restart","Quit" };
-    float y = 250;
-    for (const auto& opt : options) {
+    // setting up the options for pause menu
+    std::vector<std::string> optionStrings = { "Resume", "Main Menu", "Exit" };
+    float y = 200;
+    selectedOption = 0;
+    for (const auto& opt : optionStrings) {
         sf::Text menuText;
         menuText.setFont(font);
         menuText.setString(opt);
         menuText.setCharacterSize(30);
         menuText.setFillColor(sf::Color::White);
-        menuText.setPosition(520, y); // center each option
+        menuText.setPosition(250, y);
         menuOptions.push_back(menuText);
         y += 50;
     }
-    menuOptions[selectedOption].setFillColor(sf::Color::Red); // highlight first option
+    menuOptions[selectedOption].setFillColor(sf::Color::Red);
+
+    // setting up the background
+    background.setSize(sf::Vector2f(1280, 720));
+    background.setFillColor(sf::Color(0, 0, 0, 150));
+    std::cout << "pause menu initialized" << std::endl;
 }
 
-void PauseMenu::handleInput(sf::RenderWindow& window, bool& isPaused, int& gameState) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)window.close();
-        if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Up) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White);
-                selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
-                menuOptions[selectedOption].setFillColor(sf::Color::Red);
+// this function handles user input and updates the selected option
+void PauseMenu::handleEvent(const sf::Event& event, sf::RenderWindow& window, bool& isPaused, int& gameState) {
+    std::cout << "handling input in pause menu" << std::endl;
+
+    if (event.type == sf::Event::Closed)
+        window.close();
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Up) {
+            menuOptions[selectedOption].setFillColor(sf::Color::White);
+            selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
+            menuOptions[selectedOption].setFillColor(sf::Color::Red);
+            std::cout << "selected option: " << selectedOption << std::endl;
+        }
+        else if (event.key.code == sf::Keyboard::Down) {
+            menuOptions[selectedOption].setFillColor(sf::Color::White);
+            selectedOption = (selectedOption + 1) % menuOptions.size();
+            menuOptions[selectedOption].setFillColor(sf::Color::Red);
+            std::cout << "selected option: " << selectedOption << std::endl;
+        }
+        else if (event.key.code == sf::Keyboard::Enter) {
+            if (selectedOption == 0) { // resume
+                isPaused = false;
+                std::cout << "resumed game" << std::endl;
             }
-            if (event.key.code == sf::Keyboard::Down) {
-                menuOptions[selectedOption].setFillColor(sf::Color::White);
-                selectedOption = (selectedOption + 1) % menuOptions.size();
-                menuOptions[selectedOption].setFillColor(sf::Color::Red);
+            else if (selectedOption == 1) { // main menu
+                gameState = 0;
+                std::cout << "game state changed to: " << gameState << std::endl;
             }
-            if (event.key.code == sf::Keyboard::Enter) {
-                if (selectedOption == 0)isPaused = false; // resume game
-                else if (selectedOption == 1)gameState = 0; // restart to main menu
-                else if (selectedOption == 2)window.close(); // quit game
-            }
-            if (event.key.code == sf::Keyboard::Escape) {
-                isPaused = false; // unpause with Esc
+            else if (selectedOption == 2) { // exit
+                window.close();
+                std::cout << "window closed" << std::endl;
             }
         }
     }
 }
 
+// this function renders the pause menu on the window
 void PauseMenu::render(sf::RenderWindow& window) {
-    window.draw(background); // draw background first
-    window.draw(title);      // draw title
-    for (const auto& opt : menuOptions)window.draw(opt); // draw menu options
+    std::cout << "rendering pause menu" << std::endl;
+    window.draw(background);
+    window.draw(title);
+    for (const auto& opt : menuOptions)
+        window.draw(opt);
+    std::cout << "pause menu rendered" << std::endl;
 }

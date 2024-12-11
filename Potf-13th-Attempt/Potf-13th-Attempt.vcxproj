@@ -151,6 +151,25 @@
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\160x160 background tilemap.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Basic Tilemap.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Death 64x64.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Hurt 48x48.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\player new jump 48x48.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\player sword atk 64x64.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Sword Idle 48x48.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Sword Stab 96x48.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\PlayerWalk 48x48.png" />
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player_Sword_Run_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-audio-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-graphics-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-network-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-system-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-window-d-2.dll" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

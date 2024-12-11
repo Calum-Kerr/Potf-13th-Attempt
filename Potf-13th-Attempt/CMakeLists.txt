@@ -26,7 +26,7 @@ target_link_libraries(Potf-13th-Attempt sfml-graphics sfml-window sfml-system)
 # Specify asset directory
 set(ASSET_DIR ${CMAKE_BINARY_DIR}/../assets)
 
-# Copy assets to ../assets folder during the build process
+# Copy assets to folder during the build process
 add_custom_command(TARGET Potf-13th-Attempt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${ASSET_DIR}
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/160x160\ background\ tilemap.png ${ASSET_DIR}

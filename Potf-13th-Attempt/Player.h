@@ -1,34 +1,30 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <string>
+#include <vector>
 
-class GameWorld; // forward declaration to avoid circular includes
+class GameWorld;
 
 class Player {
 public:
     Player();
-    void update(GameWorld& world); // pass game world for collision
-    void render(sf::RenderWindow& window); // renders the player
+    void update(GameWorld& world, float deltaTime);
+    void render(sf::RenderWindow& window);
 
 private:
     sf::Sprite sprite;
-    sf::Vector2f velocity;
-    bool facingRight;
-    bool jumping;
     std::map<std::string, sf::Texture> textures;
     std::map<std::string, std::vector<sf::IntRect>> animations;
-    int currentFrame;
     std::string currentState;
     std::string previousState;
+    bool facingRight;
+    bool jumping;
+    int currentFrame;
+    sf::Vector2f velocity;
     sf::Clock animationClock;
 
-    void handleInput(); // handles user input
-    void updateAnimation(); // updates animation frames
-    void loadAnimations(); // loads animation frames
-
+    void loadAnimations();
+    void handleInput();
+    void updateAnimation();
 };
-
-#endif

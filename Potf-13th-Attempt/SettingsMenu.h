@@ -1,25 +1,20 @@
 #pragma once
-#ifndef SETTINGSMENU_H
-#define SETTINGSMENU_H
-
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <string>
 
 class SettingsMenu {
+public:
+    SettingsMenu();
+    void handleEvent(const sf::Event& event, sf::RenderWindow& window, int& gameState);
+    void render(sf::RenderWindow& window);
+    int getSelectedFPS();
+
 private:
     sf::Font font;
     sf::Text title;
     std::vector<sf::Text> options;
+    std::vector<int> fpsOptions;
     int selectedOption;
 
-    std::vector<int> fpsOptions; // stores FPS options like 60, 90, etc.
-
-public:
-    SettingsMenu();
-    void handleInput(sf::RenderWindow& window, int& gameState); // navigate options
-    void render(sf::RenderWindow& window); // draw menu
-    int getSelectedFPS(); // get selected FPS
+    void applySettings(sf::RenderWindow& window);
 };
-
-#endif

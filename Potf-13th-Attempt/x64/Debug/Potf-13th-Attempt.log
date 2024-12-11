@@ -1,8 +1,2 @@
-﻿  GameWorld.cpp
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(33,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(33,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(41,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(41,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(53,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(53,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Potf-13th-Attempt.vcxproj -> C:\Users\calum\source\repos\Potf-13th-Attempt\x64\Debug\Potf-13th-Attempt.exe
+﻿  Player.cpp
+  Potf-13th-Attempt.vcxproj -> C:\Users\calum\Downloads\New folder (5)\x64\Debug\Potf-13th-Attempt.exe

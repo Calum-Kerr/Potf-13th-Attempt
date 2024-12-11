@@ -46,19 +46,6 @@ void GameWorld::render(sf::RenderWindow& window) {
 // this function checks if the player is on the floor
 bool GameWorld::isOnFloor(const sf::Sprite& playerSprite) {
     sf::FloatRect playerBounds = playerSprite.getGlobalBounds();
-
-    int floorY = 720 - tileSize;
-    for (int x = 0; x < gridSize.x; ++x) {
-        tileSprite.setTextureRect(tileRects[0]);
-        tileSprite.setPosition(x * tileSize, floorY);
-
-        sf::FloatRect tileBounds = tileSprite.getGlobalBounds();
-
-        // check if player is resting on top of the tile
-        if (playerBounds.intersects(tileBounds) &&
-            playerBounds.top + playerBounds.height <= tileBounds.top + 5) {
-            return true;
-        }
-    }
-    return false;
-}
+    int floorY = 720 - 32;
+    return playerBounds.top + playerBounds.height >= floorY;
+}     

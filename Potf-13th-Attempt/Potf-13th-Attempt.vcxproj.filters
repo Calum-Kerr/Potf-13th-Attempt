@@ -33,6 +33,9 @@
     <ClCompile Include="SettingsMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\..\Downloads\cloister_black\CloisterBlack.ttf">
@@ -55,8 +58,50 @@
     <ClInclude Include="SettingsMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\160x160 background tilemap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Basic Tilemap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Death 64x64.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Hurt 48x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\player new jump 48x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\player sword atk 64x64.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Sword Idle 48x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player Sword Stab 96x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\PlayerWalk 48x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\Player_Sword_Run_48x48.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-audio-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-graphics-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-network-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-system-d-2.dll" />
+    <None Include="..\..\..\..\Downloads\Potf-13th-Attempt-master\Potf-13th-Attempt-master\Potf-13th-Attempt\sfml-window-d-2.dll" />
   </ItemGroup>
 </Project>

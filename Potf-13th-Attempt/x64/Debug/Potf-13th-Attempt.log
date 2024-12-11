@@ -1,2 +1,8 @@
-﻿  Player.cpp
+﻿  GameWorld.cpp
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(29,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(29,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(38,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(38,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(50,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\calum\source\repos\Potf-13th-Attempt\Potf-13th-Attempt\GameWorld.cpp(50,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Potf-13th-Attempt.vcxproj -> C:\Users\calum\source\repos\Potf-13th-Attempt\x64\Debug\Potf-13th-Attempt.exe
